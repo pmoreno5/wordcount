@@ -1,0 +1,35 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "wordcount"
+version = "0.1.0"
+description = "A small command-line word counting tool inspired by Unix wc."
+requires-python = ">=3.9"
+dependencies = ["typer"]
+
+[project.optional-dependencies]
+dev = ["pytest", "pytest-cov", "black"]
+
+[project.scripts]
+wordcount = "wordcount.cli:app"
+
+[tool.setuptools]
+packages = ["wordcount"]
+
+[tool.black]
+line-length = 88
+target-version = ["py314"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "--cov=wordcount --cov-report=term-missing"
+
+[tool.coverage.run]
+branch = true
+source = ["wordcount"]
+
+[tool.coverage.report]
+fail_under = 90
+show_missing = true
